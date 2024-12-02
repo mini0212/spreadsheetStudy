@@ -21,7 +21,7 @@ function initSpreadsheet() {
 	for (let i = 0; i < ROWS; i++) {
 		let spreadsheetRow = [];
 		for (let j = 0; j < COLS; j++) {
-			const cell = new Cell(false, false, i + '-' + j, i, j, false);
+			const cell = new Cell(false, false, '', i, j, false);
 			spreadsheetRow.push(cell);
 		}
 		spreadsheet.push(spreadsheetRow);
