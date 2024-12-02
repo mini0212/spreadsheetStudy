@@ -172,3 +172,9 @@ function clearHeaderActiveStatus() {
 		header.classList.remove('active');
 	});
 }
+
+const exportButton = document.querySelector('#export-button');
+
+exportButton.addEventListener('click', (event) => {
+	console.log(spreadsheet);
+});
