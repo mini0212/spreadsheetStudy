@@ -149,13 +149,9 @@ function handleCellClick(cell) {
 
 	columnHeaderElement.classList.add('active');
 	rowHeaderElement.classList.add('active');
-	console.log(
-		cell,
-		columnHeader,
-		rowHeader,
-		columnHeaderElement,
-		rowHeaderElement
-	);
+	document.querySelector(
+		'#cell-status'
+	).textContent = `${cell.columnName}${cell.rowName}`;
 }
 
 function handleCellOnChange(data, cell) {
