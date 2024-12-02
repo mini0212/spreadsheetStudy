@@ -118,6 +118,7 @@ function createCellElement(cell) {
 	}
 
 	cellElement.onclick = () => handleCellClick(cell);
+	cellElement.onchange = () => handleCellOnChange(cellElement.value, cell);
 	return cellElement;
 }
 
@@ -155,6 +156,10 @@ function handleCellClick(cell) {
 		columnHeaderElement,
 		rowHeaderElement
 	);
+}
+
+function handleCellOnChange(data, cell) {
+	cell.data = data;
 }
 
 function getElementFromRowAndColumn(row, column) {
