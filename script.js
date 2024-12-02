@@ -1,3 +1,4 @@
+const spreadsheetContainer = document.querySelector('#spreadsheet-container');
 const ROWS = 10;
 const COLS = 10;
 const spreadsheet = [];
@@ -25,5 +26,24 @@ function initSpreadsheet() {
 		}
 		spreadsheet.push(spreadsheetRow);
 	}
+  drawSheet();
 	console.log(spreadsheet);
+}
+
+function createCellElement(cell) {
+	const cellElement = document.createElement('input');
+	cellElement.className = 'cell';
+	cellElement.id = 'cell_' + cell.row + cell.column;
+	cellElement.value = cell.data;
+	cellElement.disabled = cell.disabled;
+	return cellElement;
+}
+
+function drawSheet() {
+	for (let i = 0; i < spreadsheet.length; i++) {
+		for (let j = 0; j < spreadsheet[i].length; j++) {
+			const cell = spreadsheet[i][j];
+			spreadsheetContainer.append(createCellElement(cell));
+		}
+	}
 }
