@@ -4,14 +4,23 @@ const COLS = 10;
 const spreadsheet = [];
 
 class Cell {
-	constructor(isHeader, disabled, data, row, column, rowName, columnName, active = false) {
+	constructor(
+		isHeader,
+		disabled,
+		data,
+		row,
+		column,
+		rowName,
+		columnName,
+		active = false
+	) {
 		this.isHeader = isHeader;
 		this.disabled = disabled;
 		this.data = data;
 		this.row = row;
 		this.column = column;
-    this.rowName = rowName;
-    this.columnName = columnName;
+		this.rowName = rowName;
+		this.columnName = columnName;
 		this.active = active;
 	}
 }
@@ -55,18 +64,18 @@ function initSpreadsheet() {
 		for (let j = 0; j < COLS; j++) {
 			let cellData = '';
 			let isHeader = false;
-      let disabled = false;
+			let disabled = false;
 
 			// 모든 row 첫번째 컬럼에 숫자 넣기
 			if (j === 0) {
 				isHeader = true;
-        disabled = true;
+				disabled = true;
 				cellData = i;
 			}
 			// 모든 columnt 첫번째 컬럼에 알파벳
 			if (i === 0) {
 				isHeader = true;
-        disabled = true;
+				disabled = true;
 				cellData = alphabets[j - 1];
 			}
 
@@ -76,10 +85,19 @@ function initSpreadsheet() {
 				cellData = '';
 			}
 
-      const rowName = i;
-      const columnName = alphabets[j - 1];
+			const rowName = i;
+			const columnName = alphabets[j - 1];
 
-			const cell = new Cell(isHeader, disabled, cellData, i, j, rowName, columnName, false);
+			const cell = new Cell(
+				isHeader,
+				disabled,
+				cellData,
+				i,
+				j,
+				rowName,
+				columnName,
+				false
+			);
 			spreadsheetRow.push(cell);
 		}
 		spreadsheet.push(spreadsheetRow);
@@ -98,6 +116,8 @@ function createCellElement(cell) {
 	if (cell.isHeader) {
 		cellElement.classList.add('header');
 	}
+
+	cellElement.onclick = () => handleCellClick(cell);
 	return cellElement;
 }
 
@@ -111,4 +131,31 @@ function drawSheet() {
 		}
 		spreadsheetContainer.append(rowContainerElement);
 	}
+}
+
+function handleCellClick(cell) {
+	const columnHeader = spreadsheet[0][cell.column];
+	const rowHeader = spreadsheet[cell.row][0];
+	const columnHeaderElement = getElementFromRowAndColumn(
+		columnHeader.row,
+		columnHeader.column
+	);
+	const rowHeaderElement = getElementFromRowAndColumn(
+		rowHeader.row,
+		rowHeader.column
+	);
+
+  columnHeaderElement.classList.add('active');
+  rowHeaderElement.classList.add('active');
+	console.log(
+		cell,
+		columnHeader,
+		rowHeader,
+		columnHeaderElement,
+		rowHeaderElement
+	);
+}
+
+function getElementFromRowAndColumn(row, column) {
+  return document.getElementById('cell_' + row + column);
 }

@@ -9,23 +9,28 @@
 }
 
 .cell-row {
-  display: flex;
+	display: flex;
 }
 
 .cell {
-  width: 80px;
-  border: 1px solid lightgray;
-  height: 40px;
-  outline: none;
-  box-sizing: border-box;
+	width: 80px;
+	border: 1px solid lightgray;
+	height: 40px;
+	outline: none;
+	box-sizing: border-box;
 }
 
 .cell.header {
-  text-align: center;
-  background: #ddd;
+	text-align: center;
+	background: #ddd;
 }
 
 .cell:focus {
-  background-color: #ddd;
-  border: 3px solid lightblue;
+	background-color: #ddd;
+	border: 3px solid lightblue;
+}
+
+.cell.header.active {
+	background: lightblue;
+	color: white;
 }
