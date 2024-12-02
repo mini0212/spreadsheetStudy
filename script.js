@@ -178,11 +178,19 @@ const exportButton = document.querySelector('#export-button');
 exportButton.addEventListener('click', (event) => {
 	let csv = '';
 	for (i = 0; i < spreadsheet.length; i++) {
+		if (i === 0) continue; // 헤더 건너뛰기
 		csv +=
 			spreadsheet[i]
 				.filter((item) => !item.isHeader)
 				.map((item) => item.data)
 				.join(',') + '\r\n';
 	}
-	console.log(csv);
+	const csvObj = new Blob([csv]);
+	const csvUrl = URL.createObjectURL(csvObj);
+	console.log(csvUrl);
+
+	const a = document.createElement('a');
+	a.href = csvUrl;
+	a.download = 'spreadsheet.csv';
+	a.click();
 });
