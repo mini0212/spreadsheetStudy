@@ -49,24 +49,29 @@ initSpreadsheet();
 function initSpreadsheet() {
 	for (let i = 0; i < ROWS; i++) {
 		let spreadsheetRow = [];
+
 		for (let j = 0; j < COLS; j++) {
 			let cellData = '';
+			let isHeader = false;
 
 			// 모든 row 첫번째 컬럼에 숫자 넣기
 			if (j === 0) {
+				isHeader = true;
 				cellData = i;
 			}
 			// 모든 columnt 첫번째 컬럼에 알파벳
 			if (i === 0) {
+				isHeader = true;
 				cellData = alphabets[j - 1];
 			}
 
 			// (0,0) 컬럼은 '';
+			// cellData가 undefined면 '';
 			if (!cellData) {
 				cellData = '';
 			}
 
-			const cell = new Cell(false, false, cellData, i, j, false);
+			const cell = new Cell(isHeader, false, cellData, i, j, false);
 			spreadsheetRow.push(cell);
 		}
 		spreadsheet.push(spreadsheetRow);
@@ -81,6 +86,10 @@ function createCellElement(cell) {
 	cellElement.id = 'cell_' + cell.row + cell.column;
 	cellElement.value = cell.data;
 	cellElement.disabled = cell.disabled;
+
+	if (cell.isHeader) {
+		cellElement.classList.add('header');
+	}
 	return cellElement;
 }
 

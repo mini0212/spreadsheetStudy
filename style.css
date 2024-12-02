@@ -20,6 +20,11 @@
   box-sizing: border-box;
 }
 
+.cell.header {
+  text-align: center;
+  background: #ddd;
+}
+
 .cell:focus {
   background-color: #ddd;
   border: 3px solid lightblue;
