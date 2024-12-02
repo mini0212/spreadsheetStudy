@@ -41,9 +41,12 @@ function createCellElement(cell) {
 
 function drawSheet() {
 	for (let i = 0; i < spreadsheet.length; i++) {
+    const rowContainerElement = document.createElement('div');
+    rowContainerElement.className = 'cell-row';
 		for (let j = 0; j < spreadsheet[i].length; j++) {
 			const cell = spreadsheet[i][j];
-			spreadsheetContainer.append(createCellElement(cell));
+			rowContainerElement.append(createCellElement(cell));
 		}
+    spreadsheetContainer.append(rowContainerElement);
 	}
 }
