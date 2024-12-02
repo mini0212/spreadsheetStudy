@@ -176,5 +176,13 @@ function clearHeaderActiveStatus() {
 const exportButton = document.querySelector('#export-button');
 
 exportButton.addEventListener('click', (event) => {
-	console.log(spreadsheet);
+	let csv = '';
+	for (i = 0; i < spreadsheet.length; i++) {
+		csv +=
+			spreadsheet[i]
+				.filter((item) => !item.isHeader)
+				.map((item) => item.data)
+				.join(',') + '\r\n';
+	}
+	console.log(csv);
 });
