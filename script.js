@@ -14,6 +14,35 @@ class Cell {
 	}
 }
 
+const alphabets = [
+	'A',
+	'B',
+	'C',
+	'D',
+	'E',
+	'F',
+	'G',
+	'H',
+	'I',
+	'J',
+	'K',
+	'L',
+	'M',
+	'N',
+	'O',
+	'P',
+	'Q',
+	'R',
+	'S',
+	'T',
+	'U',
+	'V',
+	'W',
+	'X',
+	'Y',
+	'Z',
+];
+
 // 기본 데이터 생성
 initSpreadsheet();
 
@@ -21,12 +50,28 @@ function initSpreadsheet() {
 	for (let i = 0; i < ROWS; i++) {
 		let spreadsheetRow = [];
 		for (let j = 0; j < COLS; j++) {
-			const cell = new Cell(false, false, '', i, j, false);
+			let cellData = '';
+
+			// 모든 row 첫번째 컬럼에 숫자 넣기
+			if (j === 0) {
+				cellData = i;
+			}
+			// 모든 columnt 첫번째 컬럼에 알파벳
+			if (i === 0) {
+				cellData = alphabets[j - 1];
+			}
+
+			// (0,0) 컬럼은 '';
+			if (!cellData) {
+				cellData = '';
+			}
+
+			const cell = new Cell(false, false, cellData, i, j, false);
 			spreadsheetRow.push(cell);
 		}
 		spreadsheet.push(spreadsheetRow);
 	}
-  drawSheet();
+	drawSheet();
 	console.log(spreadsheet);
 }
 
@@ -41,12 +86,12 @@ function createCellElement(cell) {
 
 function drawSheet() {
 	for (let i = 0; i < spreadsheet.length; i++) {
-    const rowContainerElement = document.createElement('div');
-    rowContainerElement.className = 'cell-row';
+		const rowContainerElement = document.createElement('div');
+		rowContainerElement.className = 'cell-row';
 		for (let j = 0; j < spreadsheet[i].length; j++) {
 			const cell = spreadsheet[i][j];
 			rowContainerElement.append(createCellElement(cell));
 		}
-    spreadsheetContainer.append(rowContainerElement);
+		spreadsheetContainer.append(rowContainerElement);
 	}
 }
