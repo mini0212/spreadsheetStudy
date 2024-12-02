@@ -134,6 +134,7 @@ function drawSheet() {
 }
 
 function handleCellClick(cell) {
+	clearHeaderActiveStatus();
 	const columnHeader = spreadsheet[0][cell.column];
 	const rowHeader = spreadsheet[cell.row][0];
 	const columnHeaderElement = getElementFromRowAndColumn(
@@ -145,8 +146,8 @@ function handleCellClick(cell) {
 		rowHeader.column
 	);
 
-  columnHeaderElement.classList.add('active');
-  rowHeaderElement.classList.add('active');
+	columnHeaderElement.classList.add('active');
+	rowHeaderElement.classList.add('active');
 	console.log(
 		cell,
 		columnHeader,
@@ -157,5 +158,12 @@ function handleCellClick(cell) {
 }
 
 function getElementFromRowAndColumn(row, column) {
-  return document.getElementById('cell_' + row + column);
+	return document.getElementById('cell_' + row + column);
+}
+
+function clearHeaderActiveStatus() {
+	const headers = document.querySelectorAll('.header');
+	headers.forEach((header) => {
+		header.classList.remove('active');
+	});
 }
