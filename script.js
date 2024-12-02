@@ -4,12 +4,14 @@ const COLS = 10;
 const spreadsheet = [];
 
 class Cell {
-	constructor(isHeader, disabled, data, row, column, active = false) {
+	constructor(isHeader, disabled, data, row, column, rowName, columnName, active = false) {
 		this.isHeader = isHeader;
 		this.disabled = disabled;
 		this.data = data;
 		this.row = row;
 		this.column = column;
+    this.rowName = rowName;
+    this.columnName = columnName;
 		this.active = active;
 	}
 }
@@ -74,7 +76,10 @@ function initSpreadsheet() {
 				cellData = '';
 			}
 
-			const cell = new Cell(isHeader, disabled, cellData, i, j, false);
+      const rowName = i;
+      const columnName = alphabets[j - 1];
+
+			const cell = new Cell(isHeader, disabled, cellData, i, j, rowName, columnName, false);
 			spreadsheetRow.push(cell);
 		}
 		spreadsheet.push(spreadsheetRow);
