@@ -53,15 +53,18 @@ function initSpreadsheet() {
 		for (let j = 0; j < COLS; j++) {
 			let cellData = '';
 			let isHeader = false;
+      let disabled = false;
 
 			// 모든 row 첫번째 컬럼에 숫자 넣기
 			if (j === 0) {
 				isHeader = true;
+        disabled = true;
 				cellData = i;
 			}
 			// 모든 columnt 첫번째 컬럼에 알파벳
 			if (i === 0) {
 				isHeader = true;
+        disabled = true;
 				cellData = alphabets[j - 1];
 			}
 
@@ -71,7 +74,7 @@ function initSpreadsheet() {
 				cellData = '';
 			}
 
-			const cell = new Cell(isHeader, false, cellData, i, j, false);
+			const cell = new Cell(isHeader, disabled, cellData, i, j, false);
 			spreadsheetRow.push(cell);
 		}
 		spreadsheet.push(spreadsheetRow);
